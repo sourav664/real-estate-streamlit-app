@@ -23,3 +23,15 @@ stages:
       - data/processed/train_trans.csv
       - data/processed/test_trans.csv
       - models/preprocesser.joblib
+
+  train:
+    cmd: python src/modeling/train.py
+    deps:
+      - data/processed/train_trans.csv
+      - data/processed/test_trans.csv
+      - models/preprocesser.joblib
+      - src/modeling/train.py
+    
+    outs:
+      - models/model.joblib
+      - models/log_transformer.joblib

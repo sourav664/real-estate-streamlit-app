@@ -18,16 +18,18 @@ handler.setLevel(logging.DEBUG)
 
 # file handler
 file_handler = logging.FileHandler('data_preparation.log')
-file_handler.setLevel(logging.ERROR)
+file_handler.setLevel(logging.DEBUG)
 
-# add handler to logger
-logger.addHandler(handler)
 
 # create a fomratter
 formatter = logging.Formatter(fmt='[%(asctime)s] (line %(lineno)d) - %(name)s - %(levelname)s in %(module)s: %(message)s')
 # add formatter to handler
 handler.setFormatter(formatter)
 file_handler.setFormatter(formatter)
+
+# ADD BOTH HANDLERS
+logger.addHandler(handler)
+logger.addHandler(file_handler)
 
 
 
