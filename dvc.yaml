@@ -46,3 +46,9 @@ stages:
 
     outs:
       - run_information.json
+
+  model_registry:
+    cmd: python src/modeling/model_registry.py
+    deps:
+      - run_information.json
+      - src/modeling/model_registry.py

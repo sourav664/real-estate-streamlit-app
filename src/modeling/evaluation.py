@@ -25,7 +25,7 @@ TARGET = "price"
 
 
 # create logger
-logger = logging.getLogger("data_preparation")
+logger = logging.getLogger("data_evaluation")
 logger.setLevel(logging.DEBUG)
 
 # console handler
