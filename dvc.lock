@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/raw/real_estate.csv
       hash: md5
-      md5: 97e95f3e4930cda8ce0440697c16b65c
-      size: 12094150
+      md5: 3f0e40254be0c71161a59324c9c1ce62
+      size: 12418840
     - path: src/data_preparation.py
       hash: md5
       md5: c6a568cb366b97e3833975bc6a5c9386
