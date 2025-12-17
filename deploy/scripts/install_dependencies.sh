@@ -6,6 +6,10 @@ export DEBIAN_FRONTEND=noninteractive
 # Update the package lists
 sudo apt-get update -y
 
+sudo apt-get install -y cron
+sudo systemctl start cron
+
+
 # Install Docker
 sudo apt-get install -y docker.io
 
