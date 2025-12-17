@@ -72,3 +72,28 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+      - name: Zip files for deployment
+        run: |
+          zip -r deployment.zip \
+            appspec.yml \
+            compose.yaml \
+            deploy/scripts/install_dependencies.sh \
+            deploy/scripts/start_docker.sh \
+            deploy/scripts/setup_backup.sh
+
+      - name: Upload ZIP to S3
+        run: |
+          aws s3 cp deployment.zip s3://real-estate-zipfile/deployment.zip
+
+      - name: Deploy to AWS CodeDeploy
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws deploy create-deployment \
+            --application-name real-estate-streamlit-prediction \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --deployment-group-name real-estate-streamlit-prediction-deployment-group \
+            --s3-location bucket=real-estate-zipfile,key=deployment.zip,bundleType=zip \
+            --file-exists-behavior OVERWRITE \
+            --region ap-south-1

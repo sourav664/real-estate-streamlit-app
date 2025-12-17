@@ -1,15 +1,13 @@
-name: my-ml-app
+name: real-estate-app
 
 services:
-   real-estate-app:
-      build: .
-      container_name: real-estate
-      env_file: .env
+  demand-prediction:
+    image: 957417441966.dkr.ecr.ap-south-1.amazonaws.com/real-estate-streamlit:latest
+    container_name: real-estate
+    env_file: .env
 
-      ports:
-        - "8000:8000"
-      
-      volumes:
-        - type: bind
-          source: ./audit/
-          target: /app/audit
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - /var/mlops/audit:/app/audit
