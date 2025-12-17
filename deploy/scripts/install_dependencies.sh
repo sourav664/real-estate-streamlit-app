@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get update -y
@@ -13,10 +14,10 @@ apt-get install -y unzip curl cron
 systemctl start cron
 systemctl enable cron
 
-# AWS CLI
+# AWS CLI v2
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
 unzip -o /tmp/awscliv2.zip -d /tmp/
-./tmp/aws/install
+ /tmp/aws/install -i /usr/local/aws-cli -b /usr/local/bin
 
 # Docker permission
 usermod -aG docker ubuntu
