@@ -41,4 +41,4 @@ fi
 
 rm -f /tmp/current_cron
 
-echo "S3 backup cron job setup completed."
+echo "S3 backup bucket cron job setup completed."
