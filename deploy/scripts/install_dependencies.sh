@@ -1,35 +1,24 @@
 #!/bin/bash
-
-# Ensure that the script runs in non-interactive mode
 export DEBIAN_FRONTEND=noninteractive
 
-# Update the package lists
-sudo apt-get update -y
+apt-get update -y
 
-sudo apt-get install -y cron
-sudo systemctl start cron
+# Docker
+apt-get install -y docker.io
+systemctl start docker
+systemctl enable docker
 
+# Utilities
+apt-get install -y unzip curl cron
+systemctl start cron
+systemctl enable cron
 
-# Install Docker
-sudo apt-get install -y docker.io
+# AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
+unzip -o /tmp/awscliv2.zip -d /tmp/
+./tmp/aws/install
 
-# Start and enable Docker service
-sudo systemctl start docker
-sudo systemctl enable docker
+# Docker permission
+usermod -aG docker ubuntu
 
-
-sudo apt-get install -y docker-compose-plugin
-
-# Install necessary utilities
-sudo apt-get install -y unzip curl
-
-# Download and install AWS CLI
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/home/ubuntu/awscliv2.zip"
-unzip -o /home/ubuntu/awscliv2.zip -d /home/ubuntu/
-sudo /home/ubuntu/aws/install
-
-# Add 'ubuntu' user to the 'docker' group to run Docker commands without 'sudo'
-sudo usermod -aG docker ubuntu
-
-# Clean up the AWS CLI installation files
-rm -rf /home/ubuntu/awscliv2.zip /home/ubuntu/aws
+echo "Dependencies installed successfully."

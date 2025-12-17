@@ -9,14 +9,14 @@ hooks:
   BeforeInstall:
     - location: deploy/scripts/install_dependencies.sh
       timeout: 300
-      runas: ubuntu
+      runas: root   # ✅ MUST be root
 
   AfterInstall:
     - location: deploy/scripts/setup_backup.sh
       timeout: 60
-      runas: ubuntu
+      runas: ubuntu # ✅ Correct
 
   ApplicationStart:
     - location: deploy/scripts/start_docker.sh
       timeout: 300
-      runas: ubuntu
+      runas: ubuntu # ✅ Correct
