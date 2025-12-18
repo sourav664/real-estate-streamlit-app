@@ -20,11 +20,25 @@ if ! command -v aws >/dev/null 2>&1; then
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
   unzip -o /tmp/awscliv2.zip -d /tmp
   /tmp/aws/install
+  rm -rf /tmp/awscliv2.zip /tmp/aws
 else
   echo "AWS CLI already installed, skipping."
 fi
 
 echo "Adding ubuntu user to docker group..."
 usermod -aG docker ubuntu
+
+# CRITICAL: Refresh docker group membership for existing processes
+echo "Refreshing docker group..."
+newgrp docker || true
+
+# Ensure docker socket has correct permissions
+chmod 666 /var/run/docker.sock
+
+# Verify ubuntu user can access docker
+echo "Verifying docker access for ubuntu user..."
+su - ubuntu -c "docker ps" || {
+    echo "WARNING: ubuntu user cannot access docker yet, but should work after relogin"
+}
 
 echo "install_dependencies.sh completed successfully"
