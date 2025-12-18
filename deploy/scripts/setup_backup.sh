@@ -9,9 +9,9 @@ date
 echo "Running as user: $(whoami)"
 echo "PWD: $(pwd)"
 
-# Ensure audit directory exists
-sudo mkdir -p /var/mlops/audit
-sudo chown -R ubuntu:ubuntu /var/mlops/audit
+# # Ensure audit directory exists
+# sudo mkdir -p /var/mlops/audit
+# sudo chown -R ubuntu:ubuntu /var/mlops/audit
 
 # Find aws CLI
 AWS_BIN="$(command -v aws || true)"

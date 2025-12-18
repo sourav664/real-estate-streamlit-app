@@ -5,8 +5,14 @@ export DEBIAN_FRONTEND=noninteractive
 echo "Updating system..."
 apt-get update -y
 
-echo "Installing base packages..."
-apt-get install -y docker.io unzip curl cron
+echo "Installing required packages..."
+apt-get install -y \
+  docker.io \
+  docker-compose-plugin \
+  unzip \
+  curl \
+  cron
+
 
 echo "Starting services..."
 systemctl start docker
@@ -27,6 +33,12 @@ fi
 
 echo "Adding ubuntu user to docker group..."
 usermod -aG docker ubuntu
+
+echo "Creating audit directory..."
+mkdir -p /var/mlops/audit
+chown -R ubuntu:ubuntu /var/mlops/audit
+chmod 755 /var/mlops/audit
+
 
 # CRITICAL: Refresh docker group membership for existing processes
 echo "Refreshing docker group..."
