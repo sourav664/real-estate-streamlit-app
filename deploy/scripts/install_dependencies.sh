@@ -5,30 +5,41 @@ export DEBIAN_FRONTEND=noninteractive
 echo "Updating system..."
 apt-get update -y
 
-echo "Installing required packages..."
-apt-get install -y \
-  docker.io \
-  docker-compose-plugin \
-  unzip \
-  curl \
-  cron
+echo "Installing prerequisites..."
+apt-get install -y ca-certificates curl gnupg lsb-release cron unzip
 
+echo "Adding Docker official GPG key..."
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
-echo "Starting services..."
-systemctl start docker
+echo "Adding Docker official repository..."
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" \
+  > /etc/apt/sources.list.d/docker.list
+
+apt-get update -y
+
+echo "Installing Docker + Compose plugin..."
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+echo "Enabling Docker and cron..."
 systemctl enable docker
-systemctl start cron
+systemctl start docker
 systemctl enable cron
+systemctl start cron
 
-# Install AWS CLI only if not installed
+# Install AWS CLI only if missing
 if ! command -v aws >/dev/null 2>&1; then
   echo "Installing AWS CLI..."
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
-  unzip -o /tmp/awscliv2.zip -d /tmp
+  curl -s https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o /tmp/awscliv2.zip
+  unzip -q /tmp/awscliv2.zip -d /tmp
   /tmp/aws/install
-  rm -rf /tmp/awscliv2.zip /tmp/aws
+  rm -rf /tmp/aws /tmp/awscliv2.zip
 else
-  echo "AWS CLI already installed, skipping."
+  echo "AWS CLI already installed"
 fi
 
 echo "Adding ubuntu user to docker group..."
@@ -38,19 +49,5 @@ echo "Creating audit directory..."
 mkdir -p /var/mlops/audit
 chown -R ubuntu:ubuntu /var/mlops/audit
 chmod 755 /var/mlops/audit
-
-
-# CRITICAL: Refresh docker group membership for existing processes
-echo "Refreshing docker group..."
-newgrp docker || true
-
-# Ensure docker socket has correct permissions
-chmod 666 /var/run/docker.sock
-
-# Verify ubuntu user can access docker
-echo "Verifying docker access for ubuntu user..."
-su - ubuntu -c "docker ps" || {
-    echo "WARNING: ubuntu user cannot access docker yet, but should work after relogin"
-}
 
 echo "install_dependencies.sh completed successfully"
