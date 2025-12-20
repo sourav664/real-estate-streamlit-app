@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/raw/real_estate.csv
       hash: md5
-      md5: 3f0e40254be0c71161a59324c9c1ce62
-      size: 12418840
+      md5: 028e0322da537d7277a4cb90f45da58f
+      size: 11837088
     - path: src/data_preparation.py
       hash: md5
       md5: c6a568cb366b97e3833975bc6a5c9386
@@ -18,55 +18,55 @@ stages:
     outs:
     - path: data/interim/test.csv
       hash: md5
-      md5: 9779d288555dbfaadf194f63fe8437de
-      size: 881948
+      md5: 487df45125d477c0556ac68093d65a7d
+      size: 818881
     - path: data/interim/train.csv
       hash: md5
-      md5: 59b35b3087bc644dd0f9e2b72376533a
-      size: 3524282
+      md5: 00c3512288d7fc23daf5ac7095f35c74
+      size: 3268466
   data_preprocessing:
     cmd: python src/data_preprocessing.py
     deps:
     - path: data/interim/test.csv
       hash: md5
-      md5: 9779d288555dbfaadf194f63fe8437de
-      size: 881948
+      md5: 487df45125d477c0556ac68093d65a7d
+      size: 818881
     - path: data/interim/train.csv
       hash: md5
-      md5: 59b35b3087bc644dd0f9e2b72376533a
-      size: 3524282
+      md5: 00c3512288d7fc23daf5ac7095f35c74
+      size: 3268466
     - path: src/data_preprocessing.py
       hash: md5
-      md5: ef57f0fa4d23dceaea69d2897526f288
-      size: 6191
+      md5: 2b354176c3cbc9a9a0dfe337ec3e1e5e
+      size: 6625
     outs:
     - path: data/processed/test_trans.csv
       hash: md5
-      md5: aaad706ab4294a972d81389fc218591b
-      size: 1014884
+      md5: 718184dfee6ba9e0f13c72f1d69d73df
+      size: 1010363
     - path: data/processed/train_trans.csv
       hash: md5
-      md5: efaa35a3c423415c026951d558731fac
-      size: 4058269
+      md5: b5ed74088e906bef469389359ff3e402
+      size: 4042140
     - path: models/preprocesser.joblib
       hash: md5
-      md5: f14d08fa3e609fb102bc36baa9c8d63c
-      size: 30739
+      md5: 319f2633478549cf75f4d16920e95707
+      size: 30563
   train:
     cmd: python src/modeling/train.py
     deps:
     - path: data/processed/test_trans.csv
       hash: md5
-      md5: aaad706ab4294a972d81389fc218591b
-      size: 1014884
+      md5: 718184dfee6ba9e0f13c72f1d69d73df
+      size: 1010363
     - path: data/processed/train_trans.csv
       hash: md5
-      md5: efaa35a3c423415c026951d558731fac
-      size: 4058269
+      md5: b5ed74088e906bef469389359ff3e402
+      size: 4042140
     - path: models/preprocesser.joblib
       hash: md5
-      md5: f14d08fa3e609fb102bc36baa9c8d63c
-      size: 30739
+      md5: 319f2633478549cf75f4d16920e95707
+      size: 30563
     - path: src/modeling/train.py
       hash: md5
       md5: 71406a4e2128873311988c9a7ed8eddb
@@ -78,23 +78,23 @@ stages:
       size: 281
     - path: models/model.joblib
       hash: md5
-      md5: 4baec2bce4c68200c7fc4408c3e8a62e
-      size: 1114600
+      md5: 9204b3651a438b4089dbc7ea16cd0448
+      size: 1042136
   evaluate:
     cmd: python src/modeling/evaluation.py
     deps:
     - path: data/processed/test_trans.csv
       hash: md5
-      md5: aaad706ab4294a972d81389fc218591b
-      size: 1014884
+      md5: 718184dfee6ba9e0f13c72f1d69d73df
+      size: 1010363
     - path: data/processed/train_trans.csv
       hash: md5
-      md5: efaa35a3c423415c026951d558731fac
-      size: 4058269
+      md5: b5ed74088e906bef469389359ff3e402
+      size: 4042140
     - path: models/model.joblib
       hash: md5
-      md5: 4baec2bce4c68200c7fc4408c3e8a62e
-      size: 1114600
+      md5: 9204b3651a438b4089dbc7ea16cd0448
+      size: 1042136
     - path: src/modeling/evaluation.py
       hash: md5
       md5: b5badcc7c0c9cba700e5a9997fc6c180
@@ -102,14 +102,14 @@ stages:
     outs:
     - path: run_information.json
       hash: md5
-      md5: 0321885ebe1faef6967a43c808532c82
+      md5: 90b7cc719721fd52f541b5a0a09b409d
       size: 223
   model_registry:
     cmd: python src/modeling/model_registry.py
     deps:
     - path: run_information.json
       hash: md5
-      md5: 0321885ebe1faef6967a43c808532c82
+      md5: 90b7cc719721fd52f541b5a0a09b409d
       size: 223
     - path: src/modeling/model_registry.py
       hash: md5

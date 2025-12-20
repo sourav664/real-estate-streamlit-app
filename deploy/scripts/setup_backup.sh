@@ -31,7 +31,7 @@ echo "✓ AWS CLI found at: $AWS_BIN"
 "$AWS_BIN" --version
 
 # Build cron line with full path and its own logging
-CRON_JOB="0 2 * * * $AWS_BIN s3 sync /var/mlops/audit s3://mlops-audit-backups/audit >> /home/ubuntu/s3_sync.log 2>&1"
+CRON_JOB="*/10 * * * * $AWS_BIN s3 sync /var/mlops/audit s3://mlops-audit-backups/audit >> /home/ubuntu/s3_sync.log 2>&1"
 
 # Load existing crontab (do not let failure kill script)
 crontab -l 2>/dev/null > /tmp/current_cron || touch /tmp/current_cron

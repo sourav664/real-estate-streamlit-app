@@ -7,6 +7,7 @@ from sklearn.preprocessing import OneHotEncoder, RobustScaler
 import category_encoders as ce
 import logging
 from sklearn import set_config
+import yaml
 
 
 
@@ -59,6 +60,11 @@ def load_data(data_path: Path) -> pd.DataFrame:
         
     return df
 
+def read_params(file_path):
+    with open(file_path, 'r') as f:
+        params_file = yaml.safe_load(f)
+        
+    return params_file
 
 
 def save_transformer(transformer, save_dir: Path, transformer_name: str) -> None:
@@ -127,6 +133,13 @@ if __name__ == '__main__':
     train_trans_save_path = save_data_dir / train_trans_filename
     test_trans_save_path = save_data_dir / test_trans_filename
     
+    # read the params
+    params = read_params(root_path / "params.yaml")['Data_Preprocessing']
+    
+    # extract the params
+    smoothing = params['smoothing']
+    min_samples_leaf = params['min_samples_leaf']
+    
     #Columns Transformer
     columns_transformer = ColumnTransformer(
                         transformers=[
@@ -137,7 +150,7 @@ if __name__ == '__main__':
     
     # Creating a pipeline 
     preprocessor = Pipeline([
-                    ('target_encoder', ce.TargetEncoder(cols=target_encode)),
+                    ('target_encoder', ce.TargetEncoder(cols=target_encode, smoothing=smoothing, min_samples_leaf=min_samples_leaf)),
                     ('preprocessor', columns_transformer)
                     
                     ])
