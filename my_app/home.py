@@ -78,7 +78,7 @@ st.write(
     - **Dataset Size:** ~40,000 property listings  
     - **Features Used:** Location, property type, size, configuration, furnishing, age  
     - **Model:** LightGBM Regressor  
-    - **Evaluation Metric:** R² Score ≈ 0.89 (best-performing model on test data)
+    - **Evaluation Metric:** R² Score ≈ 0.90 (best-performing model on test data)
     """
 )
 

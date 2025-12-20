@@ -409,8 +409,8 @@ if predict_btn:
     st.subheader("📌 Model Information")
     st.write(f"""
             • **Model:** LightGBM Regressor  
-            • **Training Data:** 31,784 properties  
-            • **Test Data:** 7,946 properties  
+            • **Training Data:** 31,776 properties  
+            • **Test Data:** 7,945 properties  
             • **R² Score:** {get_model_r2_score():.2f} (test set)  
             """)
 
