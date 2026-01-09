@@ -89,16 +89,18 @@ real-estate-hybrid-app/
 │   └── raw/            <- Original unmodified data
 │
 ├── docs/
-│   └── index.md
+│   └── READme.md
 │
 ├── models/
-│   ├── trained/
-│   ├── predictions/
-│   └── registry/
+│   ├── model.joblib
+│   ├── log_transformer.joblib
+│   └── preprocessor.joblib
 │
-├── notebooks/
+├── notebooks/ 
 │   ├── scraping_realestate_data/
-│   │   └── scrape_realestate.ipynb
+│   │   │── webscraping_api.ipynb
+│   │   ├── webscraping.ipynb
+│   │   ├── extraction.py
 │   │
 │   ├── EDA.ipynb
 │   ├── baseline_model.ipynb
