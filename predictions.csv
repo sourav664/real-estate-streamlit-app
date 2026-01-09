@@ -1,0 +1,5 @@
+propertytype,bedrooms,bathrooms,balconies,furnished,transactiontype,ageofcons,additionalRooms,region,locality,superbuiltupareasqft,totalfloornumber,predicted_price,timestamp
+multistorey apartment,2,2,1,furnished,new property,10 to 15 years,0,noida,sector 108,950,9,0.9434680924503307,2025-12-20 07:20:59
+multistorey apartment,3,3,3,semi-furnished,new property,new construction,1,gurgaon,dlf phase 5,1200,12,2.7943604834521185,2025-12-20 07:21:31
+residential house,5,5,4,semi-furnished,new property,less than 5 years,1,greaterNoida,omega 2,1150,3,3.4949350530691774,2025-12-20 07:24:00
+residential house,5,5,4,semi-furnished,new property,less than 5 years,1,delhi,vasant kunj,1450,3,5.815278700468847,2025-12-20 07:28:34

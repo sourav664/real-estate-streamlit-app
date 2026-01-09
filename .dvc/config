@@ -1,4 +1,4 @@
 [core]
     remote = myremote
 ['remote "myremote"']
-    url = s3://real-estate-dvc-bucket
+    url = s3://dvc-pipeline-realestate
