@@ -339,7 +339,7 @@ If you want a short explanation below the diagram, add this:
 ## 🧑‍💻 Author
 
 **Sourav Raj**  
-Data Scientist
+Data Scientist | Data Analyst
 
 Feel free to connect on LinkedIn or explore my other projects.
 
