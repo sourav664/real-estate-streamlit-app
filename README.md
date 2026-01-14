@@ -20,14 +20,25 @@ The project follows:
 - **Scalable and maintainable architecture**
 
 ---
+## ⭐ Key Highlights
+
+- End-to-end automated **ML + MLOps pipeline**
+- Reproducible data and model workflows using **DVC + S3**
+- Strict **model performance validation** before production deployment
+- Safe **in-place deployments** with rolling updates
+- Highly **scalable AWS architecture** using ALB & Auto Scaling Groups
+- Reliable releases with **near-zero downtime**
+
+---
 
 ## 🎯 Key Features
 
 ### ✅ Machine Learning
-- Baseline models & advanced ensemble models  
-- Hyperparameter tuning (Random Forest, LightGBM, Stacking)  
-- Model evaluation & selection  
-- Model registry & promotion workflow  
+- Baseline models and advanced ensemble models  
+- Hyperparameter tuning using **Optuna** (Random Forest, LightGBM, Stacking)  
+- Model evaluation and selection  
+- Experiment tracking, model registry, and lifecycle management using **MLflow**  
+- Model promotion across **Staging** and **Production** environments  
 
 ### ✅ Data Engineering
 - Data collection via web scraping of publicly accessible real estate listings (Magicbricks, educational use only)  
@@ -36,18 +47,17 @@ The project follows:
 - Feature engineering for improved model performance  
 - Dataset and model versioning using **DVC backed by Amazon S3**  
 
-
 ### ✅ Analytics & Visualization
 - Exploratory Data Analysis (EDA)  
 - Interactive Streamlit dashboards  
 - Business-oriented insights  
 
 ### ✅ MLOps, CI/CD & Cloud Deployment
-- CI/CD pipelines using GitHub Actions  
+- CI/CD pipelines using **GitHub Actions**  
 - Dockerized application  
-- AWS cloud deployment  
-- Model versioning & promotion  
-- Automated testing  
+- **AWS cloud deployment** (EC2, ECR, CodeDeploy, ALB, ASG)  
+- ML lifecycle automation with **MLflow + DVC**  
+- Automated testing and quality gates  
 
 ---
 
@@ -58,9 +68,44 @@ The project follows:
 - Built and optimized a **LightGBM model** using **Optuna-based hyperparameter tuning**
 - Final model achieved:
   - **R² ≈ 0.90**
-  - **MAE ≈ ₹0.6 Cr**, demonstrating high predictive accuracy
+  - **MAE ≈ ₹0.6 Cr**
 
 ---
+## 🛠 Tech Stack
+
+### Programming & Data
+- **Python**
+- **Pandas**, **NumPy**
+
+### Machine Learning
+- **LightGBM**
+- **Scikit-learn**
+- **Optuna** (hyperparameter tuning)
+
+### Experiment Tracking & MLOps
+- **MLflow** (experimentation, model registry, staging & production)
+- **DVC** (data & model versioning)
+- **Amazon S3** (DVC remote storage)
+
+### Application & Visualization
+- **Streamlit**
+
+### CI/CD & MLOps
+- **GitHub Actions**
+- **Docker**
+- **Docker Compose**
+
+### Cloud (AWS)
+- **Amazon EC2**
+- **Amazon ECR**
+- **AWS CodeDeploy**
+- **Application Load Balancer (ALB)**
+- **Auto Scaling Group (ASG)**
+- **AWS Launch Templates**
+
+### Testing
+- **Pytest**
+
 
 ## 🏗 Project Architecture
 
@@ -153,6 +198,9 @@ real-estate-hybrid-app/
 ├── requirements-docker.txt
 └── LICENSE
 ```
+---
+
+
 ## 🔁 CI/CD Pipeline (GitHub Actions)
 
 This project uses **GitHub Actions** to implement a complete **CI/CD pipeline**, automating testing, model promotion, Docker image creation, and AWS deployment.
@@ -262,6 +310,7 @@ The pipeline is triggered **on every push** to the repository.
 - Performs rolling updates
 - Ensures zero-downtime deployment
 
+This CI/CD pipeline ensures that **only validated, high-quality models** are deployed to production automatically.
 ---
 
 ## 🏗 AWS Services Used in CI/CD
@@ -277,16 +326,6 @@ The pipeline is triggered **on every push** to the repository.
 
 ---
 
-- Fully automated ML lifecycle
-- Reproducible experiments using DVC
-- Model quality gates before deployment
-- In-place deployments with controlled rollouts
-- Scalable and production-ready architecture
-- Minimal to zero downtime during releases
-
----
-
-This CI/CD pipeline ensures that **only validated, high-quality models** are deployed to production automatically.
 
 ## 🏗 Cloud Architecture Overview
 
