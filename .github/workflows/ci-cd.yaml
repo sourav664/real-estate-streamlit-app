@@ -21,6 +21,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
 
+
+      # CREATE .env HERE
+      - name: Create .env file
+        run: |
+          echo "DAGSHUB_USER_TOKEN=${{ secrets.DAGSHUB_TOKEN }}" >> .env
+          echo "ECR_REPOSITORY=${{ secrets.ECR_REPOSITORY_URI }}" >> .env
+      
       - name: Configure AWS Credintials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -67,6 +74,7 @@ jobs:
       - name: Zip files for deployment
         run: |
           zip -r deployment.zip \
+            .env \
             appspec.yml \
             compose.yaml \
             deploy/scripts/install_dependencies.sh \

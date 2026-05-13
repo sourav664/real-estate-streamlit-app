@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Create audit directory for volume mount
-RUN mkdir -p /app/audit && chmod -R 777 /app/audit
+RUN mkdir -p /app/audit && chmod -R 755 /app/audit
 
 # Copy installed Python packages
 COPY --from=builder /install /usr/local
@@ -40,7 +40,7 @@ COPY ./models/ ./models/
 COPY ./run_information.json .
 
 # Optional: data file (only if truly needed)
-COPY ./data/raw/real_estate.csv ./data/raw/real_estate.csv
+# COPY ./data/raw/real_estate.csv ./data/raw/real_estate.csv
 
 # Create non-root user
 RUN useradd -m appuser
